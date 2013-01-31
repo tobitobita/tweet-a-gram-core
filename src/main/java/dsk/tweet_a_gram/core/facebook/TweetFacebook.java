@@ -68,7 +68,7 @@ public class TweetFacebook implements TweetService<String> {
 			this.tweetDelegate.setMediaPath(filepath);
 			String tweet = StringUtils.defaultString(this.tweetDelegate.getTweet(), "");
 			if (this.tweetDelegate.isTweet()) {
-				this.postMeMessage(accessToken, tweet);
+				this.postMeMessage(accessToken, tweet, filepath);
 			} else {
 				LOG.info("つぶやきませんでした");
 			}
@@ -85,11 +85,12 @@ public class TweetFacebook implements TweetService<String> {
 		}
 	}
 
-	private void postMeMessage(String accessToken, String message) throws UnsupportedEncodingException,
-			ClientProtocolException, ParseException, IOException {
-		HttpPost post = new HttpPost("https://graph.facebook.com/me/feed");
+	private void postMeMessage(String accessToken, String message, String filePath)
+			throws UnsupportedEncodingException, ClientProtocolException, ParseException, IOException {
+		HttpPost post = new HttpPost("https://graph.facebook.com/me/photos");
 		List<BasicNameValuePair> params = new ArrayList<>();
 		params.add(new BasicNameValuePair("access_token", accessToken));
+		params.add(new BasicNameValuePair("source", filePath));
 		params.add(new BasicNameValuePair("message", message));
 		post.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
