@@ -42,11 +42,18 @@ public class FacebookAuthService implements AuthService<String> {
 	@Override
 	public String getAuthenticateTwitter() {
 		try {
-			Consumer consumer = new Consumer();
-			consumer.loadConsumer(CONSUMER_FILENAME);
-			return authDelegate.doAuthTwitter(String.format(FACEBOOK_AUTH_URL, consumer.getConsumerKey()));
+			String accessToken = this.loadAccessToken();
+			if (accessToken == null) {
+				Consumer consumer = new Consumer();
+				consumer.loadConsumer(CONSUMER_FILENAME);
+				accessToken = authDelegate.doAuthTwitter(String.format(FACEBOOK_AUTH_URL, consumer.getConsumerKey()));
+				this.saveAccessToken(accessToken);
+			}
+			return accessToken;
 		} catch (IllegalStateException e) {
 			LOG.info(e.getLocalizedMessage());
+		} catch (IOException e) {
+			LOG.error(e.getLocalizedMessage(), e);
 		}
 		return null;
 	}

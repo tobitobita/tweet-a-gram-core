@@ -15,7 +15,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
@@ -95,13 +94,7 @@ public class TweetFacebook implements TweetService<String> {
 		MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 		entity.addPart("access_token", new StringBody(accessToken));
 		entity.addPart("message", new StringBody(accessToken));
-		entity.addPart("source", new StringBody(String.format("@%s", filePath)));
-//		entity.addPart("source", new FileBody(new File(filePath)));
-		// List<BasicNameValuePair> params = new ArrayList<>();
-		// params.add(new BasicNameValuePair("access_token", accessToken));
-		// params.add(new BasicNameValuePair("source", String.format("@%s", filePath)));
-		// params.add(new BasicNameValuePair("message", message));
-//		post.setEntity(new UrlEncodedFormEntity(entity, "UTF-8"));
+		entity.addPart("source", new FileBody(new File(filePath)));
 		post.setEntity(entity);
 
 		HttpClient httpClient = new DefaultHttpClient();
