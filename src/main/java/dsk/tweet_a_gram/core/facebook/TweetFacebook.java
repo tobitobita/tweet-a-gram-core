@@ -85,9 +85,6 @@ public class TweetFacebook implements TweetService<String> {
 		}
 	}
 
-	/**
-	 * TODO Photosへポストして、Wallへリンクつける？
-	 */
 	private void postMeMessage(String accessToken, String message, String filePath)
 			throws UnsupportedEncodingException, ClientProtocolException, ParseException, IOException {
 		HttpPost post = new HttpPost("https://graph.facebook.com/me/photos");
