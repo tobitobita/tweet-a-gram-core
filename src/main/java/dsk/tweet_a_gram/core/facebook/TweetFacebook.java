@@ -7,6 +7,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 import javax.inject.Inject;
 
@@ -90,7 +91,7 @@ public class TweetFacebook implements TweetService<String> {
 		HttpPost post = new HttpPost("https://graph.facebook.com/me/photos");
 		MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 		entity.addPart("access_token", new StringBody(accessToken));
-		entity.addPart("message", new StringBody(message));
+		entity.addPart("message", new StringBody(message, Charset.forName("UTF-8")));
 		entity.addPart("source", new FileBody(new File(filePath)));
 		post.setEntity(entity);
 
