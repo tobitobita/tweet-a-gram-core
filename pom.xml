@@ -3,13 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dsk</groupId>
 	<artifactId>tweet-a-gram-core</artifactId>
-	<version>2.0.14-SNAPSHOT</version>
+	<version>1.1.14</version>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
 			<groupId>dsk</groupId>
 			<artifactId>dsk-common</artifactId>
-			<version>1.7.0</version>
+			<version>1.6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.twitter4j</groupId>
@@ -44,8 +44,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<encoding>utf-8</encoding>
 				</configuration>
 			</plugin>
